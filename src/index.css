@@ -1,0 +1,183 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Light mode background */
+    --foreground: 224 71.4% 4.1%; /* Light mode text */
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220 90% 50%; /* A more vibrant blue */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220 90% 50%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 90% 50%; /* Ring color matches primary */
+    --radius: 0.75rem; /* Slightly larger radius for modern feel */
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%; /* Dark mode background */
+    --foreground: 210 20% 98%; /* Dark mode text */
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 217.2 91.2% 59.8%; /* A vibrant blue for dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif; /* Modern sans-serif font */
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Animated gradient background for body */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -10; /* Behind all content */
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.05), 
+      hsl(var(--secondary) / 0.05) 25%, 
+      hsl(var(--muted) / 0.05) 50%, 
+      hsl(var(--accent) / 0.05) 75%, 
+      hsl(var(--primary) / 0.05)
+    );
+    background-size: 400% 400%;
+    animation: gradientAnimation 30s ease infinite;
+  }
+
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white;
+}
+
+.card-hover {
+  @apply transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2 rounded-xl;
+}
+
+.section-padding {
+  @apply py-20 md:py-28;
+}
+
+.container-custom {
+  @apply container mx-auto px-6 sm:px-8 lg:px-10 max-w-7xl;
+}
+
+.nav-link {
+  @apply relative text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300 
+         after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary 
+         after:transition-all after:duration-300 hover:after:w-full;
+}
+
+.nav-link-active {
+  @apply text-primary dark:text-primary after:w-full;
+}
+
+/* Glassmorphism for Navbar */
+.glassmorphic {
+  @apply bg-background/80 backdrop-blur-lg border-b border-border/50;
+}
+
+/* Input field focus animation */
+input[type="text"],
+input[type="email"],
+textarea {
+  @apply transition-all duration-300 focus:ring-2 focus:ring-primary focus:border-primary shadow-sm focus:shadow-md;
+}
+
+/* Button hover/focus enhancements */
+.btn-primary {
+  @apply gradient-bg font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50;
+}
+
+.btn-outline {
+  @apply border-2 border-primary text-primary font-semibold py-3 px-6 rounded-lg hover:bg-primary/10 transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50;
+}
+
+/* Blob animations for Hero */
+@keyframes blob {
+	0% {
+		transform: scale(1) translate(0px, 0px);
+	}
+	33% {
+		transform: scale(1.1) translate(30px, -50px);
+	}
+	66% {
+		transform: scale(0.9) translate(-20px, 20px);
+	}
+	100% {
+		transform: scale(1) translate(0px, 0px);
+	}
+}
+.animate-blob {
+  animation: blob 15s infinite ease-in-out;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background) / 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.6);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
