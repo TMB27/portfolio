@@ -104,4 +104,4 @@ Feel free to reach out to me at:
 
 ---
 
-© 2023 Your Name. All Rights Reserved. 
+© 2025 Tejas Badhe. All Rights Reserved. 
