@@ -131,6 +131,14 @@ const Hero = () => {
             >
               View Projects
             </Button>
+            <Button
+              variant="outline"
+              onClick={scrollToProjects}
+              className="btn-outline px-8 py-3 text-lg"
+              size="lg"
+            >
+              Download Resume
+            </Button>
           </motion.div>
 
           <motion.div

@@ -6,6 +6,58 @@ import { useToast } from "@/components/ui/use-toast";
 import { Send, Loader2, User, Mail, MessageSquare, Type } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 
+const inputFieldVariants = {
+  focus: {
+    borderColor: "hsl(var(--primary))",
+    boxShadow: "0 0 0 2px hsl(var(--primary) / 0.2)",
+    transition: { duration: 0.2 }
+  },
+  blur: {
+    borderColor: "hsl(var(--border))",
+    boxShadow: "0 0 0 0px hsl(var(--primary) / 0)",
+    transition: { duration: 0.2 }
+  }
+};
+
+const InputField = ({ icon, id, name, type = "text", placeholder, value, onChange, required = false, rows }) => (
+  <div className="relative">
+    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40">
+      {icon}
+    </span>
+    {type === "textarea" ? (
+      <motion.textarea
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        placeholder={placeholder}
+        rows={rows}
+        className="w-full pl-12 pr-4 py-3 border rounded-lg bg-background/70 focus:outline-none text-foreground placeholder:text-foreground/50 resize-none"
+        variants={inputFieldVariants}
+        whileFocus="focus"
+        initial="blur"
+        animate="blur"
+      />
+    ) : (
+      <motion.input
+        type={type}
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        placeholder={placeholder}
+        className="w-full pl-12 pr-4 py-3 border rounded-lg bg-background/70 focus:outline-none text-foreground placeholder:text-foreground/50"
+        variants={inputFieldVariants}
+        whileFocus="focus"
+        initial="blur"
+        animate="blur"
+      />
+    )}
+  </div>
+);
+
 const ContactForm = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -56,44 +108,6 @@ const ContactForm = () => {
       setIsSubmitting(false);
     }
   };
-
-  const inputFieldVariants = {
-    focus: {
-      borderColor: "hsl(var(--primary))",
-      boxShadow: "0 0 0 2px hsl(var(--primary) / 0.2)",
-      transition: { duration: 0.2 }
-    },
-    blur: {
-      borderColor: "hsl(var(--border))",
-      boxShadow: "0 0 0 0px hsl(var(--primary) / 0)",
-      transition: { duration: 0.2 }
-    }
-  };
-
-  const InputField = ({ icon, id, name, type = "text", placeholder, value, onChange, required = false, rows }) => (
-    <div className="relative">
-      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40">
-        {icon}
-      </span>
-      <motion.input
-        as={type === "textarea" ? "textarea" : "input"}
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={placeholder}
-        rows={rows}
-        className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-background/70 focus:outline-none text-foreground placeholder:text-foreground/50 ${type === "textarea" ? "resize-none" : ""}`}
-        variants={inputFieldVariants}
-        whileFocus="focus"
-        initial="blur"
-        animate="blur"
-      />
-    </div>
-  );
-
 
   return (
     <motion.div 
