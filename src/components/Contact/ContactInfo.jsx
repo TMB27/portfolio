@@ -105,7 +105,7 @@ const ContactInfo = () => {
         <div className="mt-auto pt-10">
           <Button asChild className="btn-primary w-full text-lg py-3.5" size="lg">
             <a href={personalInfo.cv_url} target="_blank" rel="noopener noreferrer">
-              <FileText className="mr-2 h-5 w-5" /> Download CV
+              <FileText className="mr-2 h-5 w-5" /> Download Resume
             </a>
           </Button>
         </div>

@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, GitCommit as GitHub, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, GitCommit as GitHub, Linkedin, Mail, FileText } from 'lucide-react';
 import { PersonalInfoContext } from "@/App";
 import { Loader2 } from 'lucide-react';
 
@@ -131,13 +131,10 @@ const Hero = () => {
             >
               View Projects
             </Button>
-            <Button
-              variant="outline"
-              onClick={scrollToProjects}
-              className="btn-outline px-8 py-3 text-lg"
-              size="lg"
-            >
-              Download Resume
+            <Button asChild className="btn-primary px-8 py-3 text-lg" size="lg">
+              <a href={personalInfo.cv_url} target="_blank" rel="noopener noreferrer">
+                <FileText className="mr-2 h-5 w-5" /> Download Resume
+              </a>
             </Button>
           </motion.div>
 
